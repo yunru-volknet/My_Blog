@@ -1,0 +1,591 @@
+html[data-ui-theme="mecha"] {
+  --void: #020507;
+  --panel: #071116;
+  --panel-raised: #0d1c22;
+  --line: rgba(105, 255, 239, 0.22);
+  --line-strong: rgba(105, 255, 239, 0.62);
+  --cyan: #69ffef;
+  --cyan-soft: #c5fff9;
+  --violet: #b377ff;
+  --amber: #ffcc57;
+  --text: #e1eef0;
+  --muted: #82999e;
+}
+
+[data-ui-theme="mecha"] body {
+  background:
+    radial-gradient(ellipse at 69% -8%, rgba(105, 255, 239, 0.14), transparent 30rem),
+    radial-gradient(ellipse at 98% 54%, rgba(179, 119, 255, 0.11), transparent 38rem),
+    linear-gradient(112deg, #020507 0%, #061016 48%, #030609 100%);
+}
+
+[data-ui-theme="mecha"] body::before {
+  opacity: 0.82;
+  background-image:
+    linear-gradient(30deg, rgba(105, 255, 239, 0.035) 12%, transparent 12.5%, transparent 87%, rgba(105, 255, 239, 0.035) 87.5%),
+    linear-gradient(150deg, rgba(105, 255, 239, 0.035) 12%, transparent 12.5%, transparent 87%, rgba(105, 255, 239, 0.035) 87.5%),
+    linear-gradient(30deg, rgba(105, 255, 239, 0.035) 12%, transparent 12.5%, transparent 87%, rgba(105, 255, 239, 0.035) 87.5%),
+    linear-gradient(150deg, rgba(105, 255, 239, 0.035) 12%, transparent 12.5%, transparent 87%, rgba(105, 255, 239, 0.035) 87.5%);
+  background-position: 0 0, 0 0, 42px 72px, 42px 72px;
+  background-size: 84px 144px;
+}
+
+[data-ui-theme="mecha"] .ambient-scanline {
+  opacity: 0.12;
+  background: repeating-linear-gradient(to bottom, transparent 0, transparent 4px, rgba(190, 255, 249, 0.14) 5px);
+}
+
+[data-ui-theme="mecha"] .ambient-grid {
+  top: 7rem;
+  right: -5rem;
+  width: 34rem;
+  height: 34rem;
+  transform: rotate(12deg);
+  border: 2px solid rgba(105, 255, 239, 0.09);
+  border-radius: 8%;
+  box-shadow: inset 0 0 80px rgba(105, 255, 239, 0.025), 0 0 80px rgba(105, 255, 239, 0.03);
+}
+
+[data-ui-theme="mecha"] .ambient-grid::before {
+  inset: 10%;
+  border: 1px dashed rgba(179, 119, 255, 0.18);
+  border-radius: 50%;
+}
+
+[data-ui-theme="mecha"] .ambient-grid::after {
+  inset: 28%;
+  border: 2px solid rgba(105, 255, 239, 0.14);
+  border-radius: 12%;
+  box-shadow: 0 0 90px rgba(105, 255, 239, 0.12);
+}
+
+.mecha-frame {
+  display: none;
+}
+
+[data-ui-theme="mecha"] .mecha-frame {
+  position: fixed;
+  z-index: 18;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+[data-ui-theme="mecha"] .mecha-frame span {
+  position: absolute;
+  display: block;
+  opacity: 0.55;
+}
+
+[data-ui-theme="mecha"] .mecha-frame-top,
+[data-ui-theme="mecha"] .mecha-frame-bottom {
+  right: 1.1rem;
+  left: 1.1rem;
+  height: 0.45rem;
+  border-right: 5rem solid transparent;
+  border-left: 5rem solid transparent;
+  background: repeating-linear-gradient(90deg, var(--cyan) 0 2rem, transparent 2rem 2.45rem);
+  mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+}
+
+[data-ui-theme="mecha"] .mecha-frame-top { top: 0; }
+[data-ui-theme="mecha"] .mecha-frame-bottom { bottom: 0; transform: rotate(180deg); }
+
+[data-ui-theme="mecha"] .mecha-frame-left,
+[data-ui-theme="mecha"] .mecha-frame-right {
+  top: 22%;
+  bottom: 22%;
+  width: 3px;
+  background: linear-gradient(transparent, var(--violet) 20%, var(--cyan) 50%, var(--violet) 80%, transparent);
+  box-shadow: 0 0 15px rgba(105, 255, 239, 0.45);
+}
+
+[data-ui-theme="mecha"] .mecha-frame-left { left: 0; }
+[data-ui-theme="mecha"] .mecha-frame-right { right: 0; }
+
+[data-ui-theme="mecha"] .app-header {
+  border-color: rgba(105, 255, 239, 0.52);
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 204, 87, 0.07) 0 9px, transparent 9px 18px) top right / 7rem 0.45rem no-repeat,
+    linear-gradient(155deg, rgba(26, 48, 52, 0.96), rgba(4, 11, 15, 0.98) 44%, rgba(11, 11, 23, 0.98)),
+    #050b0f;
+  box-shadow: inset -18px 0 35px rgba(0, 0, 0, 0.36), 20px 0 80px rgba(0, 0, 0, 0.45);
+}
+
+[data-ui-theme="mecha"] .sidebar-grid {
+  opacity: 0.72;
+  background-image:
+    linear-gradient(rgba(105, 255, 239, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(105, 255, 239, 0.045) 1px, transparent 1px),
+    linear-gradient(135deg, transparent 48%, rgba(179, 119, 255, 0.06) 49%, transparent 51%);
+  background-size: 22px 22px, 22px 22px, 88px 88px;
+}
+
+[data-ui-theme="mecha"] .faction-id {
+  padding: 0.55rem 0.65rem;
+  border: 1px solid rgba(255, 204, 87, 0.28);
+  background: linear-gradient(90deg, rgba(255, 204, 87, 0.12), transparent);
+  color: var(--amber);
+  clip-path: polygon(0.6rem 0, 100% 0, 100% calc(100% - 0.6rem), calc(100% - 0.6rem) 100%, 0 100%, 0 0.6rem);
+}
+
+[data-ui-theme="mecha"] .faction-id-mark {
+  border-width: 2px;
+  border-color: var(--amber);
+  box-shadow: inset 0 0 6px var(--amber), 0 0 12px rgba(255, 204, 87, 0.6);
+}
+
+[data-ui-theme="mecha"] .app-header-emblem {
+  border: 2px solid rgba(105, 255, 239, 0.52);
+  border-radius: 18% 50% 18% 50%;
+  background:
+    linear-gradient(135deg, rgba(105, 255, 239, 0.12), transparent 45%),
+    #03090d;
+  box-shadow:
+    inset 0 0 0 0.55rem rgba(105, 255, 239, 0.035),
+    inset 0 0 32px rgba(105, 255, 239, 0.12),
+    0 0 35px rgba(105, 255, 239, 0.18);
+}
+
+[data-ui-theme="mecha"] .app-header-emblem::before {
+  inset: -0.65rem;
+  border-width: 3px;
+  border-top-color: var(--amber);
+  border-bottom-color: var(--violet);
+  border-radius: 15% 48% 15% 48%;
+  animation-duration: 9s;
+}
+
+[data-ui-theme="mecha"] .app-header-emblem::after {
+  inset: 0.22rem;
+  border: 2px dashed rgba(197, 255, 249, 0.44);
+  border-radius: 24%;
+}
+
+[data-ui-theme="mecha"] .emblem-orbit {
+  inset: -1rem;
+  border-width: 2px;
+  border-color: rgba(255, 204, 87, 0.28);
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 18%;
+  transform: rotate(45deg);
+}
+
+[data-ui-theme="mecha"] .app-header-avatar {
+  border: 2px solid rgba(105, 255, 239, 0.48);
+  box-shadow: 0 0 22px rgba(105, 255, 239, 0.24);
+  filter: saturate(0.95) contrast(1.22) brightness(0.86);
+}
+
+[data-ui-theme="mecha"] .app-header-title {
+  color: #f2ffff;
+  text-shadow: 2px 0 rgba(179, 119, 255, 0.45), 0 0 18px rgba(105, 255, 239, 0.16);
+  letter-spacing: -0.04em;
+}
+
+[data-ui-theme="mecha"] .app-header-subtitle {
+  color: #769297;
+}
+
+[data-ui-theme="mecha"] .app-header-menu {
+  gap: 0.55rem;
+}
+
+[data-ui-theme="mecha"] .app-header-menu-item {
+  min-height: 3.25rem;
+  padding-left: 1rem;
+  border: 1px solid rgba(105, 255, 239, 0.25);
+  background:
+    linear-gradient(90deg, rgba(105, 255, 239, 0.07), transparent 65%),
+    #071117;
+  clip-path: polygon(0.7rem 0, 100% 0, 100% calc(100% - 0.7rem), calc(100% - 0.7rem) 100%, 0 100%, 0 0.7rem);
+  box-shadow: inset 3px 0 rgba(105, 255, 239, 0.14), inset -12px 0 rgba(0, 0, 0, 0.3);
+}
+
+[data-ui-theme="mecha"] .app-header-menu-item:hover,
+[data-ui-theme="mecha"] .app-header-menu-item.active {
+  border-color: rgba(255, 204, 87, 0.55);
+  background:
+    linear-gradient(90deg, rgba(255, 204, 87, 0.14), rgba(105, 255, 239, 0.055) 68%, transparent),
+    #0a151a;
+  color: #fff4ce;
+  box-shadow: inset 4px 0 var(--amber), inset -12px 0 rgba(0, 0, 0, 0.3), 0 0 18px rgba(255, 204, 87, 0.05);
+}
+
+[data-ui-theme="mecha"] .ui-selector {
+  padding: 0.7rem;
+  border: 1px solid rgba(105, 255, 239, 0.18);
+  background: rgba(0, 0, 0, 0.25);
+  clip-path: polygon(0.55rem 0, 100% 0, 100% calc(100% - 0.55rem), calc(100% - 0.55rem) 100%, 0 100%, 0 0.55rem);
+}
+
+[data-ui-theme="mecha"] .ui-selector-label {
+  color: var(--amber);
+}
+
+[data-ui-theme="mecha"] .ui-selector button {
+  border-color: rgba(105, 255, 239, 0.2);
+  background: #061014;
+  clip-path: polygon(0.4rem 0, 100% 0, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) 100%, 0 100%, 0 0.4rem);
+}
+
+[data-ui-theme="mecha"] .ui-selector button[aria-pressed="true"] {
+  border-color: rgba(255, 204, 87, 0.62);
+  background: linear-gradient(110deg, rgba(255, 204, 87, 0.18), rgba(179, 119, 255, 0.08));
+  color: #fff4d2;
+  box-shadow: inset 3px 0 var(--amber), 0 0 20px rgba(255, 204, 87, 0.07);
+}
+
+[data-ui-theme="mecha"] .ui-selector button[aria-pressed="true"] span {
+  color: var(--amber);
+}
+
+[data-ui-theme="mecha"] .command-bar {
+  height: 4rem;
+  border-top: 3px solid #111e22;
+  border-bottom: 2px solid rgba(105, 255, 239, 0.36);
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 204, 87, 0.16) 0 7px, transparent 7px 14px) right / 8rem 0.35rem no-repeat,
+    linear-gradient(180deg, rgba(16, 32, 37, 0.97), rgba(4, 11, 15, 0.96));
+  box-shadow: 0 9px 28px rgba(0, 0, 0, 0.35), inset 0 -1px rgba(105, 255, 239, 0.16);
+}
+
+[data-ui-theme="mecha"] .command-route {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgba(105, 255, 239, 0.2);
+  background: rgba(105, 255, 239, 0.045);
+  clip-path: polygon(0.4rem 0, 100% 0, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) 100%, 0 100%, 0 0.4rem);
+}
+
+[data-ui-theme="mecha"] .command-interface strong {
+  color: var(--amber);
+}
+
+[data-ui-theme="mecha"] .archive-hero {
+  min-height: 29rem;
+  border: 2px solid rgba(105, 255, 239, 0.55);
+  background:
+    radial-gradient(circle at 78% 48%, rgba(105, 255, 239, 0.09), transparent 12rem),
+    linear-gradient(135deg, rgba(17, 39, 45, 0.98), rgba(5, 15, 20, 0.96) 56%, rgba(17, 11, 29, 0.94)),
+    #071116;
+  box-shadow:
+    inset 0 0 0 0.5rem rgba(105, 255, 239, 0.025),
+    inset 0 0 85px rgba(105, 255, 239, 0.05),
+    0 30px 100px rgba(0, 0, 0, 0.42),
+    0 0 0 0.28rem rgba(5, 12, 15, 0.86);
+  clip-path: polygon(0 1.7rem, 1.7rem 0, calc(100% - 4rem) 0, calc(100% - 2.4rem) 1.6rem, 100% 1.6rem, 100% calc(100% - 2.4rem), calc(100% - 2.4rem) 100%, 2.2rem 100%, 0 calc(100% - 2.2rem));
+}
+
+[data-ui-theme="mecha"] .archive-hero::before {
+  top: -7rem;
+  right: -1rem;
+  width: 35rem;
+  height: 35rem;
+  border: 2px solid rgba(105, 255, 239, 0.17);
+  background:
+    repeating-radial-gradient(circle, transparent 0 34px, rgba(105, 255, 239, 0.055) 35px, transparent 37px),
+    conic-gradient(from 12deg, transparent 0 7%, rgba(255, 204, 87, 0.13) 7% 8%, transparent 8% 23%, rgba(179, 119, 255, 0.14) 23% 24%, transparent 24% 43%, rgba(105, 255, 239, 0.12) 43% 44%, transparent 44%);
+  animation: mecha-radar 24s linear infinite;
+}
+
+[data-ui-theme="mecha"] .archive-hero::after {
+  top: 0;
+  right: 4rem;
+  width: 15rem;
+  height: 0.55rem;
+  background: repeating-linear-gradient(135deg, var(--amber) 0 12px, #141416 12px 24px);
+  box-shadow: 0 0 18px rgba(255, 204, 87, 0.36);
+}
+
+[data-ui-theme="mecha"] .hero-kicker {
+  display: inline-flex;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgba(255, 204, 87, 0.36);
+  background: linear-gradient(90deg, rgba(255, 204, 87, 0.11), transparent);
+  color: var(--amber);
+  clip-path: polygon(0.5rem 0, 100% 0, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0 100%, 0 0.5rem);
+}
+
+[data-ui-theme="mecha"] .archive-hero h1 {
+  max-width: 50rem;
+  color: #f3ffff;
+  text-shadow: 4px 3px rgba(179, 119, 255, 0.25), 0 0 30px rgba(105, 255, 239, 0.12);
+}
+
+[data-ui-theme="mecha"] .archive-hero h1 span {
+  color: rgba(9, 24, 29, 0.3);
+  -webkit-text-stroke: 2px rgba(197, 255, 249, 0.82);
+  text-shadow: 4px 4px rgba(179, 119, 255, 0.22), 0 0 34px rgba(105, 255, 239, 0.14);
+}
+
+[data-ui-theme="mecha"] .hero-telemetry {
+  gap: 0.5rem;
+  border-top: 0;
+}
+
+[data-ui-theme="mecha"] .hero-telemetry > div {
+  position: relative;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(105, 255, 239, 0.22);
+  background: linear-gradient(135deg, rgba(105, 255, 239, 0.09), rgba(0, 0, 0, 0.26));
+  clip-path: polygon(0.45rem 0, 100% 0, 100% calc(100% - 0.45rem), calc(100% - 0.45rem) 100%, 0 100%, 0 0.45rem);
+}
+
+[data-ui-theme="mecha"] .hero-telemetry > div + div {
+  padding-left: 1rem;
+  border-left: 1px solid rgba(105, 255, 239, 0.22);
+}
+
+[data-ui-theme="mecha"] .hero-telemetry strong {
+  color: var(--amber);
+}
+
+[data-ui-theme="mecha"] .hero-signal span {
+  width: 5px;
+  background: linear-gradient(var(--amber), var(--cyan), var(--violet));
+  box-shadow: 0 0 10px rgba(105, 255, 239, 0.8);
+}
+
+[data-ui-theme="mecha"] .section-heading {
+  padding: 0.9rem 1rem;
+  border-left: 4px solid var(--amber);
+  border-bottom: 1px solid rgba(105, 255, 239, 0.28);
+  background: linear-gradient(90deg, rgba(255, 204, 87, 0.075), transparent 62%);
+  clip-path: polygon(0 0, calc(100% - 1.3rem) 0, 100% 1.3rem, 100% 100%, 0 100%);
+}
+
+[data-ui-theme="mecha"] .posts-list {
+  gap: 0.9rem;
+}
+
+[data-ui-theme="mecha"] .posts-list-item-link {
+  min-height: 8rem;
+  border: 1px solid rgba(105, 255, 239, 0.32);
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 204, 87, 0.08) 0 7px, transparent 7px 14px) right top / 5rem 0.3rem no-repeat,
+    linear-gradient(105deg, rgba(22, 44, 48, 0.82), rgba(5, 15, 20, 0.96) 47%, rgba(12, 11, 23, 0.92));
+  box-shadow: inset 0 0 0 0.3rem rgba(105, 255, 239, 0.018), inset -20px 0 rgba(0, 0, 0, 0.16), 0 10px 28px rgba(0, 0, 0, 0.22);
+  clip-path: polygon(0 0.9rem, 0.9rem 0, calc(100% - 2rem) 0, calc(100% - 1.1rem) 0.9rem, 100% 0.9rem, 100% calc(100% - 1.15rem), calc(100% - 1.15rem) 100%, 0 100%);
+}
+
+[data-ui-theme="mecha"] .posts-list-item-link::after {
+  width: 2rem;
+  height: 2rem;
+  border-width: 3px;
+  border-color: rgba(179, 119, 255, 0.52);
+}
+
+[data-ui-theme="mecha"] .posts-list-item-link:hover {
+  transform: translateX(7px) scale(1.005);
+  border-color: rgba(255, 204, 87, 0.62);
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 204, 87, 0.18) 0 7px, transparent 7px 14px) right top / 7rem 0.35rem no-repeat,
+    linear-gradient(105deg, rgba(30, 55, 57, 0.94), rgba(7, 20, 25, 0.98) 48%, rgba(22, 14, 36, 0.96));
+  box-shadow: inset 4px 0 var(--amber), 0 16px 40px rgba(0, 0, 0, 0.28), 0 0 28px rgba(105, 255, 239, 0.06);
+}
+
+[data-ui-theme="mecha"] .posts-list-index {
+  margin: 0.2rem 0;
+  border: 1px solid rgba(255, 204, 87, 0.32);
+  border-right: 3px solid var(--amber);
+  background: rgba(255, 204, 87, 0.07);
+  color: var(--amber);
+  clip-path: polygon(0.45rem 0, 100% 0, 100% 100%, 0 100%, 0 0.45rem);
+}
+
+[data-ui-theme="mecha"] .posts-list-classification {
+  color: var(--amber);
+}
+
+[data-ui-theme="mecha"] .posts-list-action {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid rgba(105, 255, 239, 0.18);
+  background: rgba(105, 255, 239, 0.035);
+  clip-path: polygon(0.35rem 0, 100% 0, 100% calc(100% - 0.35rem), calc(100% - 0.35rem) 100%, 0 100%, 0 0.35rem);
+}
+
+[data-ui-theme="mecha"] .page-heading,
+[data-ui-theme="mecha"] .post-header {
+  border: 2px solid rgba(105, 255, 239, 0.46);
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 204, 87, 0.11) 0 8px, transparent 8px 16px) right top / 8rem 0.45rem no-repeat,
+    linear-gradient(125deg, rgba(19, 43, 48, 0.97), rgba(5, 15, 20, 0.96) 58%, rgba(19, 12, 32, 0.94));
+  box-shadow: inset 0 0 0 0.35rem rgba(105, 255, 239, 0.02), 0 20px 60px rgba(0, 0, 0, 0.3);
+  clip-path: polygon(0 1.2rem, 1.2rem 0, calc(100% - 3rem) 0, calc(100% - 1.5rem) 1.5rem, 100% 1.5rem, 100% 100%, 0 100%);
+}
+
+[data-ui-theme="mecha"] .page-heading::after,
+[data-ui-theme="mecha"] .post-header::before {
+  height: 0.45rem;
+  background: repeating-linear-gradient(135deg, var(--amber) 0 9px, #18181a 9px 18px);
+  box-shadow: 0 0 15px rgba(255, 204, 87, 0.25);
+}
+
+[data-ui-theme="mecha"] .post-title {
+  text-shadow: 3px 2px rgba(179, 119, 255, 0.24), 0 0 26px rgba(105, 255, 239, 0.1);
+}
+
+[data-ui-theme="mecha"] .post-meta > div {
+  border-color: rgba(105, 255, 239, 0.26);
+  background: linear-gradient(120deg, rgba(105, 255, 239, 0.08), rgba(0, 0, 0, 0.28));
+  clip-path: polygon(0.35rem 0, 100% 0, 100% calc(100% - 0.35rem), calc(100% - 0.35rem) 100%, 0 100%, 0 0.35rem);
+}
+
+[data-ui-theme="mecha"] .post-content {
+  border: 2px solid rgba(105, 255, 239, 0.22);
+  background:
+    linear-gradient(90deg, rgba(105, 255, 239, 0.025) 1px, transparent 1px),
+    linear-gradient(rgba(105, 255, 239, 0.025) 1px, transparent 1px),
+    rgba(5, 14, 18, 0.94);
+  background-size: 32px 32px;
+  box-shadow: inset 0 0 70px rgba(105, 255, 239, 0.025);
+}
+
+[data-ui-theme="mecha"] .content-clearance {
+  border-bottom: 2px solid rgba(105, 255, 239, 0.24);
+  background: linear-gradient(90deg, rgba(255, 204, 87, 0.08), transparent 45%);
+}
+
+[data-ui-theme="mecha"] .content-clearance strong {
+  color: var(--amber);
+}
+
+[data-ui-theme="mecha"] .post-content > pre,
+[data-ui-theme="mecha"] .post-content .highlight > pre,
+[data-ui-theme="mecha"] .post-content .highlight > div {
+  border: 1px solid rgba(105, 255, 239, 0.26);
+  border-left: 4px solid var(--amber);
+  background: #02070a !important;
+  box-shadow: inset 0 0 35px rgba(105, 255, 239, 0.035), 0 8px 22px rgba(0, 0, 0, 0.2);
+  clip-path: polygon(0.55rem 0, 100% 0, 100% calc(100% - 0.55rem), calc(100% - 0.55rem) 100%, 0 100%, 0 0.55rem);
+}
+
+[data-ui-theme="mecha"] .tags-list-item-title {
+  min-height: 10rem;
+  border: 1px solid rgba(105, 255, 239, 0.32);
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 204, 87, 0.09) 0 7px, transparent 7px 14px) right top / 5rem 0.35rem no-repeat,
+    linear-gradient(135deg, rgba(18, 40, 44, 0.86), rgba(6, 15, 20, 0.95));
+  clip-path: polygon(0 0.8rem, 0.8rem 0, calc(100% - 1rem) 0, 100% 1rem, 100% 100%, 0 100%);
+  box-shadow: inset 0 0 0 0.28rem rgba(105, 255, 239, 0.018);
+}
+
+[data-ui-theme="mecha"] .tags-list-item-title:hover {
+  border-color: var(--amber);
+  box-shadow: inset 3px 0 var(--amber), 0 15px 38px rgba(0, 0, 0, 0.3);
+}
+
+[data-ui-theme="mecha"] .tags-list-item-title strong {
+  color: var(--amber);
+}
+
+[data-ui-theme="mecha"] .page-link {
+  border-color: rgba(105, 255, 239, 0.26);
+  border-radius: 0;
+  background: #081318;
+  clip-path: polygon(0.35rem 0, 100% 0, 100% calc(100% - 0.35rem), calc(100% - 0.35rem) 100%, 0 100%, 0 0.35rem);
+}
+
+[data-ui-theme="mecha"] .page-link:hover,
+[data-ui-theme="mecha"] .page-item.active .page-link {
+  border-color: var(--amber);
+  background: rgba(255, 204, 87, 0.12);
+  color: #fff4cf;
+}
+
+[data-ui-theme="mecha"] .app-footer {
+  border-top: 2px solid rgba(105, 255, 239, 0.24);
+  background: repeating-linear-gradient(135deg, rgba(255, 204, 87, 0.08) 0 7px, transparent 7px 14px) top left / 8rem 0.35rem no-repeat;
+}
+
+@keyframes mecha-radar {
+  to { transform: rotate(360deg); }
+}
+
+@media (min-width: 940px) {
+  [data-ui-theme="mecha"] .app-header {
+    width: 22rem;
+    padding-right: 2.35rem;
+    padding-left: 2.35rem;
+  }
+
+  [data-ui-theme="mecha"] .app-header::after {
+    width: 5px;
+    height: 46%;
+    background: linear-gradient(transparent, var(--amber), var(--cyan), var(--violet), transparent);
+    box-shadow: 0 0 18px rgba(105, 255, 239, 0.78);
+  }
+
+  [data-ui-theme="mecha"] .app-main {
+    margin-left: 22rem;
+  }
+
+  [data-ui-theme="mecha"] .app-header-emblem {
+    width: 10rem;
+    height: 10rem;
+    margin-top: 0.7rem;
+    margin-bottom: 2rem;
+  }
+
+  [data-ui-theme="mecha"] .app-header-avatar {
+    width: 7.9rem;
+    height: 7.9rem;
+  }
+
+  [data-ui-theme="mecha"] .sidebar-status {
+    right: 2.35rem;
+    left: 2.35rem;
+    padding: 0.8rem;
+    border: 1px solid rgba(105, 255, 239, 0.16);
+    background: rgba(0, 0, 0, 0.22);
+    clip-path: polygon(0.45rem 0, 100% 0, 100% calc(100% - 0.45rem), calc(100% - 0.45rem) 100%, 0 100%, 0 0.45rem);
+  }
+}
+
+@media (max-width: 939px) {
+  [data-ui-theme="mecha"] .app-header {
+    box-shadow: inset 0 -8px rgba(0, 0, 0, 0.2), 0 12px 38px rgba(0, 0, 0, 0.3);
+  }
+
+  [data-ui-theme="mecha"] .mecha-frame-top,
+  [data-ui-theme="mecha"] .mecha-frame-bottom {
+    right: 0.35rem;
+    left: 0.35rem;
+  }
+}
+
+@media (max-width: 640px) {
+  [data-ui-theme="mecha"] .archive-hero {
+    min-height: auto;
+    border-width: 1px;
+    clip-path: polygon(0 1rem, 1rem 0, calc(100% - 2rem) 0, calc(100% - 1rem) 1rem, 100% 1rem, 100% calc(100% - 1.2rem), calc(100% - 1.2rem) 100%, 1.2rem 100%, 0 calc(100% - 1.2rem));
+  }
+
+  [data-ui-theme="mecha"] .archive-hero::after {
+    right: 2rem;
+    width: 8rem;
+  }
+
+  [data-ui-theme="mecha"] .hero-telemetry {
+    gap: 0.25rem;
+  }
+
+  [data-ui-theme="mecha"] .hero-telemetry > div {
+    padding: 0.65rem 0.55rem;
+  }
+
+  [data-ui-theme="mecha"] .posts-list-item-link {
+    min-height: 7rem;
+  }
+
+  [data-ui-theme="mecha"] .posts-list-index {
+    margin: 0;
+  }
+
+  [data-ui-theme="mecha"] .mecha-frame-left,
+  [data-ui-theme="mecha"] .mecha-frame-right {
+    top: 30%;
+    bottom: 30%;
+  }
+}

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ .Site.LanguageCode | default "en-us" }}">
+<html lang="{{ .Site.LanguageCode | default "en-us" }}" data-ui-theme="tactical">
   <head>
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} // {{ .Site.Title }}{{ end }}</title>
     <link rel="shortcut icon" href="{{ .Site.Params.favicon | default "/favicon.ico" }}" />
@@ -9,6 +9,16 @@
     <meta name="theme-color" content="#050a0f" />
     <meta name="author" content="{{ .Site.Params.author | default "John Doe" }}" />
     <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}" />
+    <script>
+      (function () {
+        try {
+          var savedTheme = localStorage.getItem("foehn-ui-theme");
+          if (savedTheme === "tactical" || savedTheme === "mecha") {
+            document.documentElement.setAttribute("data-ui-theme", savedTheme);
+          }
+        } catch (error) {}
+      })();
+    </script>
     {{ $style := resources.Get "css/main.scss" | resources.ExecuteAsTemplate "css/main.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint -}}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
     {{ with .OutputFormats.Get "rss" -}}
@@ -24,6 +34,12 @@
     <a class="skip-link" href="#main-content">跳转到主要内容</a>
     <div class="ambient-grid" aria-hidden="true"></div>
     <div class="ambient-scanline" aria-hidden="true"></div>
+    <div class="mecha-frame" aria-hidden="true">
+      <span class="mecha-frame-top"></span>
+      <span class="mecha-frame-right"></span>
+      <span class="mecha-frame-bottom"></span>
+      <span class="mecha-frame-left"></span>
+    </div>
     <header class="app-header">
       <div class="sidebar-grid" aria-hidden="true"></div>
       <div class="faction-id">
@@ -50,6 +66,17 @@
         {{- end }}
       </nav>
       {{- end }}
+      <div class="ui-selector">
+        <span class="ui-selector-label">INTERFACE LOADOUT / 界面方案</span>
+        <div class="ui-selector-options" role="group" aria-label="选择博客界面风格">
+          <button type="button" data-theme-option="tactical" aria-pressed="true">
+            <span>01</span><strong>战术终端</strong>
+          </button>
+          <button type="button" data-theme-option="mecha" aria-pressed="false">
+            <span>02</span><strong>机甲驾驶舱</strong>
+          </button>
+        </div>
+      </div>
       <p class="app-header-description">{{ .Site.Params.description | default "Knowledge is power." }}</p>
       {{- with .Site.Params.social }}
       <div class="app-header-social">
@@ -70,6 +97,7 @@
     <div class="app-main">
       <div class="command-bar">
         <span class="command-route">{{ partial "icon.html" (dict "ctx" $ "name" "terminal") }} NODE://{{ if .IsHome }}ARCHIVE{{ else }}{{ .Section | upper | default "PAGE" }}{{ end }}</span>
+        <span class="command-interface">UI://<strong id="ui-mode-label">TACTICAL TERMINAL</strong></span>
         <span class="command-sync"><span class="status-pulse"></span> DATA LINK STABLE</span>
       </div>
       <main id="main-content" class="app-container">
@@ -82,5 +110,34 @@
         <span>© {{ now.Year }} {{ .Site.Params.author | upper }} / ALL SIGNALS RECORDED</span>
       </footer>
     </div>
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var options = document.querySelectorAll("[data-theme-option]");
+        var modeLabel = document.getElementById("ui-mode-label");
+
+        function applyTheme(theme, persist) {
+          var selected = theme === "mecha" ? "mecha" : "tactical";
+          root.setAttribute("data-ui-theme", selected);
+          options.forEach(function (option) {
+            option.setAttribute("aria-pressed", String(option.getAttribute("data-theme-option") === selected));
+          });
+          if (modeLabel) {
+            modeLabel.textContent = selected === "mecha" ? "MECHA COCKPIT" : "TACTICAL TERMINAL";
+          }
+          if (persist) {
+            try { localStorage.setItem("foehn-ui-theme", selected); } catch (error) {}
+          }
+        }
+
+        options.forEach(function (option) {
+          option.addEventListener("click", function () {
+            applyTheme(option.getAttribute("data-theme-option"), true);
+          });
+        });
+
+        applyTheme(root.getAttribute("data-ui-theme"), false);
+      })();
+    </script>
   </body>
 </html>
