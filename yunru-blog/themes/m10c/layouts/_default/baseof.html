@@ -73,7 +73,7 @@
             <span>01</span><strong>战术终端</strong>
           </button>
           <button type="button" data-theme-option="mecha" aria-pressed="false">
-            <span>02</span><strong>机甲装甲</strong>
+            <span>02</span><strong>焚风装甲</strong>
           </button>
         </div>
       </div>
@@ -123,7 +123,7 @@
             option.setAttribute("aria-pressed", String(option.getAttribute("data-theme-option") === selected));
           });
           if (modeLabel) {
-            modeLabel.textContent = selected === "mecha" ? "MECHA ARMOR" : "TACTICAL TERMINAL";
+            modeLabel.textContent = selected === "mecha" ? "FOEHN ARMOR" : "TACTICAL TERMINAL";
           }
           if (persist) {
             try { localStorage.setItem("foehn-ui-theme", selected); } catch (error) {}
