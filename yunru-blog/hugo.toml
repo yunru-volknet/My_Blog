@@ -1,4 +1,4 @@
-baseURL = "https://yunru-voleknet.github.io/My_Blog/"
+baseURL = "https://yunru-volknet.github.io/My_Blog/"
 title = "YUNRU // FOEHN ARCHIVE"
 languageCode = "zh-CN"
 defaultContentLanguage = "zh"
@@ -36,8 +36,8 @@ summaryLength = 42
   favicon = "/favicon.ico"
   [[params.social]]
     icon = "github"
-    name = "GitHub / yunru-voleknet"
-    url = "https://github.com/yunru-voleknet"
+    name = "GitHub / yunru-volknet"
+    url = "https://github.com/yunru-volknet"
 
   # Default theme
   #[params.style]
