@@ -1,0 +1,214 @@
+.post {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.post-header {
+  position: relative;
+  margin-bottom: 1rem;
+  padding: clamp(1.6rem, 5vw, 3.6rem);
+  border: 1px solid var(--line-strong);
+  background:
+    linear-gradient(115deg, rgba(12, 33, 41, 0.96), rgba(7, 15, 23, 0.9)),
+    var(--panel);
+  clip-path: polygon(0 0, calc(100% - 2rem) 0, 100% 2rem, 100% 100%, 0 100%);
+}
+
+.post-header::before {
+  position: absolute;
+  top: 0;
+  right: 3rem;
+  width: 8rem;
+  height: 3px;
+  content: "";
+  background: var(--violet);
+  box-shadow: 0 0 16px rgba(156, 125, 255, 0.8);
+}
+
+.post-backlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 2rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+}
+
+.post-backlink .icon {
+  width: 0.9rem;
+}
+
+.post-title {
+  max-width: 60rem;
+  margin: 0.65rem 0 1.5rem;
+  color: $lightest-color;
+  font-size: clamp(2.2rem, 6.5vw, 5.4rem);
+  overflow-wrap: anywhere;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.post-meta > div {
+  display: flex;
+  min-height: 2.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(81, 246, 226, 0.14);
+  background: rgba(3, 10, 14, 0.42);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.57rem;
+  letter-spacing: 0.06em;
+}
+
+.post-meta > div > .icon {
+  width: 0.85rem;
+  margin-right: 0.15rem;
+  color: var(--cyan);
+}
+
+.post-meta strong {
+  color: var(--cyan-soft);
+  font-weight: 500;
+}
+
+.post-content {
+  position: relative;
+  padding: clamp(1.5rem, 5vw, 4.5rem);
+  border: 1px solid rgba(81, 246, 226, 0.12);
+  background: rgba(7, 16, 22, 0.88);
+  color: #adc2c7;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: clamp(0.94rem, 1.3vw, 1.04rem);
+  line-height: 1.9;
+}
+
+.content-clearance {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: calc(clamp(1.5rem, 5vw, 4.5rem) * -1) calc(clamp(1.5rem, 5vw, 4.5rem) * -1) 2.4rem;
+  padding: 0.75rem clamp(1.5rem, 5vw, 4.5rem);
+  border-bottom: 1px solid var(--line);
+  color: #5d767d;
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+}
+
+.content-clearance strong {
+  color: var(--cyan);
+  font-weight: 500;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4 {
+  scroll-margin-top: 5rem;
+}
+
+.post-content h1,
+.post-content h2 {
+  position: relative;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.post-content h1::before,
+.post-content h2::before {
+  margin-right: 0.55rem;
+  color: var(--cyan);
+  content: "//";
+  font-family: var(--mono);
+  font-size: 0.7em;
+}
+
+.post-content h3 {
+  color: #c8f9f4;
+}
+
+.post-content > pre,
+.post-content .highlight {
+  margin: 1.5rem 0;
+}
+
+.post-content > pre,
+.post-content .highlight > pre,
+.post-content .highlight > div {
+  position: relative;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid rgba(81, 246, 226, 0.18);
+  border-left: 3px solid var(--cyan);
+  background: #040a0e !important;
+  box-shadow: inset 0 0 30px rgba(81, 246, 226, 0.02);
+}
+
+.post-content blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.3rem;
+  border: 1px solid rgba(156, 125, 255, 0.2);
+  border-left: 3px solid var(--violet);
+  background: rgba(156, 125, 255, 0.055);
+  color: #a99fcf;
+}
+
+.post-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.post-content img {
+  max-width: 100%;
+  padding: 0.35rem;
+  border: 1px solid var(--line);
+  background: #071016;
+}
+
+.post-content a:not(.tag) {
+  border-bottom: 1px dotted rgba(81, 246, 226, 0.55);
+}
+
+.post-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.post-content th,
+.post-content td {
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--line);
+}
+
+.post-content th {
+  background: rgba(81, 246, 226, 0.07);
+  color: var(--cyan-soft);
+}
+
+.post-footer {
+  margin-top: 2rem;
+}
+
+@media (max-width: 600px) {
+  .post-header {
+    clip-path: polygon(0 0, calc(100% - 1.1rem) 0, 100% 1.1rem, 100% 100%, 0 100%);
+  }
+
+  .post-title {
+    font-size: clamp(2rem, 12vw, 3.5rem);
+  }
+
+  .post-meta > div {
+    flex: 1 1 auto;
+  }
+}

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="{{ .Site.LanguageCode | default "en-us" }}">
+  <head>
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} // {{ .Site.Title }}{{ end }}</title>
+    <link rel="shortcut icon" href="{{ .Site.Params.favicon | default "/favicon.ico" }}" />
+    <meta charset="utf-8" />
+    {{ hugo.Generator }}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050a0f" />
+    <meta name="author" content="{{ .Site.Params.author | default "John Doe" }}" />
+    <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}" />
+    {{ $style := resources.Get "css/main.scss" | resources.ExecuteAsTemplate "css/main.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint -}}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
+    {{ with .OutputFormats.Get "rss" -}}
+    {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
+    {{ end }}
+
+    {{ template "_internal/google_analytics.html" . }}
+    {{ template "_internal/twitter_cards.html" . }}
+    {{ template "_internal/opengraph.html" . }}
+
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳转到主要内容</a>
+    <div class="ambient-grid" aria-hidden="true"></div>
+    <div class="ambient-scanline" aria-hidden="true"></div>
+    <header class="app-header">
+      <div class="sidebar-grid" aria-hidden="true"></div>
+      <div class="faction-id">
+        <span class="faction-id-mark"></span>
+        <span>{{ .Site.Params.faction | default "FOEHN NETWORK" }}</span>
+        <span class="faction-id-code">FN-07</span>
+      </div>
+      <a class="app-header-emblem" href="{{ "/" | relURL }}" aria-label="返回档案终端">
+        <span class="emblem-orbit" aria-hidden="true"></span>
+        <img class="app-header-avatar" src="{{ .Site.Params.avatar | default "avartar.jpg" | relURL }}" alt="焚风阵营标志" />
+      </a>
+      <div class="brand-lockup">
+        <span class="app-header-title">{{ .Site.Title }}</span>
+        <span class="app-header-subtitle">MENTAL OMEGA / TACTICAL KNOWLEDGE NODE</span>
+      </div>
+      {{- with .Site.Menus.main }}
+      <nav class="app-header-menu" aria-label="主导航">
+        {{- range $index, $item := . }}
+          <a class="app-header-menu-item{{ if $.IsMenuCurrent "main" . }} active{{ end }}" href="{{ $item.URL | relURL }}">
+            <span class="menu-index">0{{ add $index 1 }}</span>
+            <span>{{ $item.Name }}</span>
+            {{ partial "icon.html" (dict "ctx" $ "name" "chevron-right") }}
+          </a>
+        {{- end }}
+      </nav>
+      {{- end }}
+      <p class="app-header-description">{{ .Site.Params.description | default "Knowledge is power." }}</p>
+      {{- with .Site.Params.social }}
+      <div class="app-header-social">
+        {{ range . }}
+          <a href="{{ .url }}" target="_blank" rel="noreferrer noopener me" aria-label="{{ .name }}">
+            {{ partial "icon.html" (dict "ctx" $ "name" .icon "title" .name) }}
+            <span>{{ .name }}</span>
+          </a>
+        {{ end }}
+      </div>
+      {{- end }}
+      <div class="sidebar-status" aria-label="系统状态">
+        <div><span class="status-pulse"></span> ARCHIVE NODE ONLINE</div>
+        <div><span>ENCRYPTION</span><strong>QUANTUM / ACTIVE</strong></div>
+        <div><span>ACCESS</span><strong>FIELD OPERATIVE</strong></div>
+      </div>
+    </header>
+    <div class="app-main">
+      <div class="command-bar">
+        <span class="command-route">{{ partial "icon.html" (dict "ctx" $ "name" "terminal") }} NODE://{{ if .IsHome }}ARCHIVE{{ else }}{{ .Section | upper | default "PAGE" }}{{ end }}</span>
+        <span class="command-sync"><span class="status-pulse"></span> DATA LINK STABLE</span>
+      </div>
+      <main id="main-content" class="app-container">
+        {{ block "main" . }}
+          {{ .Content }}
+        {{ end }}
+      </main>
+      <footer class="app-footer">
+        <span>FOEHN ARCHIVE SYSTEM</span>
+        <span>© {{ now.Year }} {{ .Site.Params.author | upper }} / ALL SIGNALS RECORDED</span>
+      </footer>
+    </div>
+  </body>
+</html>

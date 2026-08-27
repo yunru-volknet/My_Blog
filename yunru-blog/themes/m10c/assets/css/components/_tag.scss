@@ -1,0 +1,18 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  margin: 0.12rem;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid rgba(156, 125, 255, 0.24);
+  background: rgba(156, 125, 255, 0.07);
+  color: #b6a7ef;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  white-space: nowrap;
+}
+
+.tag:hover {
+  border-color: var(--violet);
+  background: rgba(156, 125, 255, 0.14);
+  color: #e5ddff;
+}

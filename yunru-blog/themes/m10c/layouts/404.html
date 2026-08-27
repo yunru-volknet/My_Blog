@@ -1,0 +1,8 @@
+{{ define "main" }}
+  <div class="error-404">
+    <span class="section-code">SYSTEM EXCEPTION / SIGNAL LOST</span>
+    <h1 class="error-404-title">4<span>0</span>4</h1>
+    <p>目标档案不存在，或该数据链路已被切断。</p>
+    <a href="{{ "/" | relURL }}">重新接入档案终端 {{ partial "icon.html" (dict "ctx" $ "name" "arrow-right") }}</a>
+  </div>
+{{ end }}

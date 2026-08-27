@@ -1,0 +1,15 @@
+# Hugo generated output
+yunru-blog/public/
+yunru-blog/resources/_gen/
+yunru-blog/themes/m10c/resources/_gen/
+yunru-blog/.hugo_build.lock
+
+# Local legacy configuration and backups
+yunru-blog/config.toml
+yunru-blog_hugo-toml备份/
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

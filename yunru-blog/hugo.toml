@@ -1,0 +1,64 @@
+baseURL = "https://yunru-voleknet.github.io/My_Blog/"
+title = "YUNRU // FOEHN ARCHIVE"
+languageCode = "zh-CN"
+defaultContentLanguage = "zh"
+hasCJKLanguage = true
+themesDir = "themes"
+theme = "m10c"
+paginate = 8
+enableRobotsTXT = true
+summaryLength = 42
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "档案终端"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    identifier = "tags"
+    name = "数据索引"
+    url = "/tags/"
+    weight = 2
+  [[menu.main]]
+    identifier = "about"
+    name = "节点信息"
+    url = "/about/"
+    weight = 3
+
+[params]
+  author = "yunru"
+  description = "记录代码、密码学与链上攻防的焚风技术档案。"
+  faction = "FOEHN REVOLT"
+  motto = "KNOWLEDGE IS POWER"
+  menu_item_separator = ""
+  avatar = "/avartar.jpg"
+  favicon = "/favicon.ico"
+  [[params.social]]
+    icon = "github"
+    name = "GitHub / yunru-voleknet"
+    url = "https://github.com/yunru-voleknet"
+
+  # Default theme
+  #[params.style]
+  #  darkestColor = "#242930"
+  #  darkColor = "#353b43"
+  #  lightColor = "#afbac4"
+  #  lightestColor = "#ffffff"
+  #  primaryColor = "#57cc8a"
+
+  # Foehn tactical interface
+  [params.style]
+    darkestColor = "#07131a"
+    darkColor = "#050a0f"
+    lightColor = "#9db6bd"
+    lightestColor = "#effdff"
+    primaryColor = "#51f6e2"
+
+  # Red theme
+  #[params.style]
+  #  darkestColor = "#d35050"
+  #  darkColor = "#212121"
+  #  lightColor = "#d6d6d6"
+  #  lightestColor = "#d3d3d3"
+  #  primaryColor = "#ffffff"

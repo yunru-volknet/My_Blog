@@ -1,0 +1,17 @@
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.55.0"
+    theme = "m10c"
+  [params]
+    author = "作者姓名"
+    description = "作者简介"
+    avatar = "/static/avatar.jpg"
+    menu_item_separator = " - "
+    favicon = "/static/favicon.ico"
+  [params.style]
+    darkestColor = "#d35050"
+    darkColor = "#212121"
+    lightColor = "#f5e3e0"
+    lightestColor = "#f5f5f5"
+    primaryColor = "#ffffff"

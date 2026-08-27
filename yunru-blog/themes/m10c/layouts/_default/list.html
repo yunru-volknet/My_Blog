@@ -1,0 +1,55 @@
+{{ define "main" }}
+  <article class="archive-view">
+    {{ if .IsHome }}
+      <section class="archive-hero">
+        <div class="hero-signal" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="hero-kicker">
+          {{ partial "icon.html" (dict "ctx" $ "name" "crosshair") }}
+          FOEHN FIELD INTELLIGENCE / 最高机密
+        </div>
+        <h1>焚风<br><span>战术档案库</span></h1>
+        <p>接入技术节点，检索代码、密码学与链上攻防记录。知识不只是力量——它是改变战局的武器。</p>
+        <div class="hero-telemetry">
+          <div><strong>{{ len (where .Site.RegularPages "Type" "posts") }}</strong><span>数据条目</span></div>
+          <div><strong>{{ len .Site.Taxonomies.tags }}</strong><span>分类协议</span></div>
+          <div><strong>100%</strong><span>节点同步</span></div>
+        </div>
+      </section>
+      <header class="section-heading">
+        <div>
+          <span class="section-code">DATA STREAM / LATEST</span>
+          <h2>最新情报</h2>
+        </div>
+        <span class="section-count">{{ len (where .Site.RegularPages "Type" "posts") }} RECORDS FOUND</span>
+      </header>
+    {{ else }}
+      <header class="page-heading">
+        <span class="section-code">ARCHIVE DIRECTORY</span>
+        <h1>{{ .Title }}</h1>
+      </header>
+    {{ end }}
+    <ul class="posts-list">
+      {{ range $index, $page := where .Paginator.Pages "Type" "!=" "page" }}
+        <li class="posts-list-item">
+          <a class="posts-list-item-link" href="{{ .RelPermalink }}">
+            <span class="posts-list-index">{{ printf "%02d" (add $index 1) }}</span>
+            <span class="posts-list-content">
+              <span class="posts-list-classification">
+                {{ with .Params.tags }}{{ index . 0 | upper }}{{ else }}FIELD NOTE{{ end }}
+              </span>
+              <span class="posts-list-item-title">{{ .Title }}</span>
+              <span class="posts-list-item-description">
+                <span>{{ partial "icon.html" (dict "ctx" $ "name" "calendar") }} {{ .PublishDate.Format "2006.01.02" }}</span>
+                <span>{{ partial "icon.html" (dict "ctx" $ "name" "clock") }} {{ .ReadingTime }} MIN</span>
+              </span>
+            </span>
+            <span class="posts-list-action" aria-hidden="true">OPEN {{ partial "icon.html" (dict "ctx" $ "name" "arrow-up-right") }}</span>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+    {{ partial "pagination.html" $ }}
+  </article>
+{{ end }}

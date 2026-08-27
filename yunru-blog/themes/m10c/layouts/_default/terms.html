@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <article class="archive-view">
+    <header class="page-heading">
+      <span class="section-code">CLASSIFIED DATA INDEX</span>
+      <h1>数据索引</h1>
+      <p>按协议标签检索全部技术记录。</p>
+    </header>
+    <ul class="tags-list">
+      {{ range .Data.Terms.ByCount }}
+        <li class="tags-list-item">
+            <a class="tags-list-item-title" href="{{ .Page.Permalink }}">
+              <span>{{ partial "icon.html" (dict "ctx" $ "name" "hash") }} {{ .Page.Title }}</span>
+              <strong>{{ printf "%02d" .Count }}</strong>
+              <small>RECORDS</small>
+            </a>
+        </li>
+      {{ end }}
+    </ul>
+  </article>
+{{ end }}

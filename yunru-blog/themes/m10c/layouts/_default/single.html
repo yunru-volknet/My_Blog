@@ -1,0 +1,38 @@
+{{ define "main" }}
+  <article class="post">
+    <header class="post-header">
+      <a class="post-backlink" href="{{ "/" | relURL }}">{{ partial "icon.html" (dict "ctx" $ "name" "arrow-left") }} 返回档案终端</a>
+      <span class="section-code">INTELLIGENCE RECORD / {{ .File.UniqueID | truncate 8 "" | upper }}</span>
+      <h1 class ="post-title">{{ .Title }}</h1>
+      {{- if ne .Type "page" }}
+      <div class="post-meta">
+        <div>
+          {{ partial "icon.html" (dict "ctx" $ "name" "calendar") }}
+          <span>记录日期</span><strong>{{ .PublishDate.Format "2006.01.02" }}</strong>
+        </div>
+        <div>
+          {{ partial "icon.html" (dict "ctx" $ "name" "clock") }}
+          <span>预计读取</span><strong>{{ .ReadingTime }} MIN</strong>
+        </div>
+        {{- with .Params.tags }}
+        <div>
+          {{ partial "icon.html" (dict "ctx" $ "name" "tag") }}
+          {{- range . -}}
+            {{ with $.Site.GetPage (printf "/%s/%s" "tags" . ) }}
+              <a class="tag" href="{{ .Permalink }}">{{ .Title }}</a>
+            {{- end }}
+          {{- end }}
+        </div>
+        {{- end }}
+      </div>
+      {{- end }}
+    </header>
+    <div class="post-content">
+      <div class="content-clearance"><span>SECURITY CLEARANCE</span><strong>AUTHORIZED</strong></div>
+      {{ .Content }}
+    </div>
+    <div class="post-footer">
+      {{ template "_internal/disqus.html" . }}
+    </div>
+  </article>
+{{ end }}
