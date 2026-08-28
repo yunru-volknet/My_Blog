@@ -23,3 +23,4 @@ $primary-color: {{ .Site.Params.style.primaryColor | default "#57cc8a" }};
 // Optional heavy mecha cockpit interface. Loaded last so its scoped
 // [data-ui-theme="mecha"] rules can override the tactical defaults.
 @import 'components/mecha';
+@import 'components/foehn_eva';
