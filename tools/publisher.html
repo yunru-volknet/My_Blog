@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#041114">
+  <title>焚风档案上传终端</title>
+  <style>
+    :root{color-scheme:dark;--bg:#03090c;--panel:#07181d;--panel2:#0b252c;--edge:#155966;--cyan:#58fff0;--cyan-soft:#b9fff9;--purple:#b879ff;--muted:#76a6a6;--text:#e4fffc;--danger:#ff8793;--ok:#89ffd1}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,"Microsoft YaHei",system-ui,sans-serif;background:radial-gradient(ellipse at 88% 8%,rgba(184,121,255,.13),transparent 28rem),radial-gradient(ellipse at 12% 0,rgba(57,255,237,.15),transparent 34rem),linear-gradient(140deg,#020709,#06181d 55%,#080d16)}
+    body:before{position:fixed;inset:0;pointer-events:none;content:"";opacity:.26;background-image:linear-gradient(rgba(88,255,240,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(88,255,240,.055) 1px,transparent 1px);background-size:36px 36px;mask-image:linear-gradient(120deg,black,transparent 76%)}
+    main{position:relative;width:min(100% - 32px,820px);margin:7vh auto;padding:clamp(22px,5vw,48px);border:1px solid rgba(88,255,240,.5);background:linear-gradient(145deg,rgba(14,71,80,.76),rgba(3,17,22,.95) 47%,rgba(29,14,47,.87));box-shadow:inset 0 0 0 5px rgba(1,10,13,.84),inset 0 0 48px rgba(88,255,240,.055),0 28px 90px #0009,0 0 32px rgba(88,255,240,.09);clip-path:polygon(0 22px,22px 0,calc(100% - 64px) 0,100% 28px,100% calc(100% - 22px),calc(100% - 22px) 100%,18px 100%,0 calc(100% - 18px))}
+    .eyebrow{display:flex;align-items:center;gap:10px;color:var(--purple);font:700 11px/1.5 ui-monospace,monospace;letter-spacing:.15em;text-transform:uppercase}.pulse{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+    h1{margin:16px 0 8px;font-size:clamp(28px,6vw,46px);line-height:1.15;letter-spacing:-.04em;text-shadow:0 0 24px rgba(88,255,240,.19)}
+    .intro{margin:0;color:#a3c9c7;line-height:1.8}
+    .terminal-line{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin:28px 0 18px;padding:11px 14px;border-top:1px solid #48d8d2;border-bottom:3px solid #08252b;background:linear-gradient(90deg,#0a414b,#04191f 65%,#291545);font:700 11px ui-monospace,monospace;color:#8deee6;letter-spacing:.08em}
+    .terminal-line b{color:var(--purple)}
+    .drop{display:grid;place-items:center;min-height:220px;padding:28px;border:1px dashed rgba(88,255,240,.55);background:linear-gradient(145deg,rgba(88,255,240,.055),transparent 45%),rgba(1,12,16,.58);text-align:center;transition:.18s ease;cursor:pointer;clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px)}
+    .drop:hover,.drop.over{border-color:var(--cyan);background-color:rgba(18,100,109,.2);box-shadow:inset 0 0 36px rgba(88,255,240,.08),0 0 20px rgba(88,255,240,.08)}
+    .upload-mark{display:grid;place-items:center;width:54px;height:54px;margin:0 auto 14px;border:1px solid var(--cyan);color:var(--cyan);font-size:27px;box-shadow:inset 0 0 18px rgba(88,255,240,.12),0 0 16px rgba(88,255,240,.14);clip-path:polygon(20% 0,80% 0,100% 20%,100% 80%,80% 100%,20% 100%,0 80%,0 20%)}
+    .drop strong{display:block;font-size:16px}.drop small{display:block;margin-top:8px;color:var(--muted)}
+    input[type=file]{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}
+    .preview{display:none;margin-top:18px;padding:16px;border-left:3px solid var(--purple);background:linear-gradient(90deg,rgba(184,121,255,.09),rgba(3,14,18,.62));overflow-wrap:anywhere}.preview.show{display:block}.preview-kicker{color:var(--muted);font:700 10px ui-monospace,monospace;letter-spacing:.13em}.preview h2{margin:8px 0;font-size:18px}.preview p{margin:5px 0;color:#a0c2c0;font-size:13px}.preview pre{max-height:120px;margin:12px 0 0;overflow:auto;color:#73aaa8;font:12px/1.65 ui-monospace,monospace;white-space:pre-wrap}
+    .actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:22px}.publish{min-height:48px;padding:0 22px;border:1px solid #a3fff6;background:linear-gradient(105deg,#16808a,#0a444d 58%,#512681);color:#f1fffd;font:800 13px ui-monospace,monospace;letter-spacing:.08em;box-shadow:inset 0 0 0 3px #05232a,0 0 20px rgba(88,255,240,.17);clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);cursor:pointer}.publish:disabled{opacity:.42;cursor:not-allowed;filter:saturate(.4)}.hint{color:var(--muted);font-size:12px;line-height:1.65}
+    .status{display:none;margin-top:18px;padding:13px 15px;border:1px solid rgba(88,255,240,.38);background:rgba(4,34,39,.78);color:var(--cyan-soft);font-size:13px;line-height:1.7;overflow-wrap:anywhere}.status.show{display:block}.status.error{border-color:rgba(255,135,147,.55);color:var(--danger);background:rgba(54,13,22,.4)}.status.success{border-color:rgba(137,255,209,.48);color:var(--ok)}.status a{color:var(--cyan);text-underline-offset:3px}.footer{margin-top:30px;padding-top:14px;border-top:1px solid rgba(88,255,240,.2);color:#638c8c;font:10px ui-monospace,monospace;letter-spacing:.08em}
+    @media(max-width:520px){main{margin:16px auto;padding:22px 18px}.drop{min-height:180px}.terminal-line{font-size:10px}.actions{align-items:stretch}.publish{width:100%}.hint{width:100%}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow"><span class="pulse"></span> FOEHN ARCHIVE / LOCAL PUBLISH NODE</div>
+    <h1>文章上传终端</h1>
+    <p class="intro">选择一篇 Markdown 档案，确认后即可提交到焚风档案库并更新根域名博客。发布器仅在本机运行，使用当前 GitHub SSH 权限完成同步。</p>
+    <div class="terminal-line"><span>INPUT://MARKDOWN</span><span>DEST://CONTENT / POSTS</span><b>DEPLOY://ROOT ARCHIVE</b></div>
+    <form id="publish-form">
+      <label class="drop" id="drop-zone" for="markdown-file" tabindex="0">
+        <span><span class="upload-mark" aria-hidden="true">↑</span><strong>拖入 .md 文件，或点击选择</strong><small>UTF-8 Markdown · 单篇最多 3 MB</small></span>
+      </label>
+      <input id="markdown-file" type="file" accept=".md,text/markdown,text/plain">
+      <section class="preview" id="preview" aria-live="polite">
+        <div class="preview-kicker">UPLOAD PREVIEW / 档案预览</div>
+        <h2 id="article-title"></h2>
+        <p id="article-file"></p>
+        <p id="article-route"></p>
+        <pre id="article-excerpt"></pre>
+      </section>
+      <div class="actions">
+        <button class="publish" id="publish-button" type="submit" disabled>上传并发布 →</button>
+        <span class="hint">会同步文章源码，并将生成的网站推送到博客根域名仓库。</span>
+      </div>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+    </form>
+    <div class="footer">LOCAL ONLY · 127.0.0.1 · FOEHN NETWORK NODE FN-07</div>
+  </main>
+  <script>
+    const input = document.getElementById("markdown-file");
+    const drop = document.getElementById("drop-zone");
+    const preview = document.getElementById("preview");
+    const button = document.getElementById("publish-button");
+    const status = document.getElementById("status");
+    let selectedFile = null;
+
+    function slugify(value) {
+      return value.normalize("NFKC").toLocaleLowerCase("zh-CN").replace(/\.md$/i, "").replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-+|-+$/g, "").slice(0, 90).replace(/-+$/g, "");
+    }
+
+    function titleFrom(content, filename) {
+      const frontMatter = content.match(/^(\+\+\+|---)\r?\n([\s\S]*?)\r?\n\1(?:\r?\n|$)/);
+      const field = frontMatter?.[2].match(/^title\s*(?:=|:)\s*["']?(.+?)["']?\s*$/mi);
+      return field?.[1]?.trim() || content.match(/^#\s+(.+)\s*$/m)?.[1]?.trim() || filename.replace(/\.md$/i, "").replace(/[-_]+/g, " ");
+    }
+
+    function showStatus(message, kind = "") {
+      status.textContent = message;
+      status.className = `status show ${kind}`;
+    }
+
+    async function chooseFile(file) {
+      status.className = "status";
+      selectedFile = null;
+      button.disabled = true;
+      preview.classList.remove("show");
+      if (!file) return;
+      if (!/\.md$/i.test(file.name)) return showStatus("这里只接收 .md 文件。", "error");
+      if (file.size > 3 * 1024 * 1024) return showStatus("文章超过 3 MB 限制。", "error");
+      try {
+        const text = new TextDecoder("utf-8", { fatal: true }).decode(await file.arrayBuffer()).replace(/^\uFEFF/, "");
+        if (!text.trim()) return showStatus("文章内容为空。", "error");
+        selectedFile = file;
+        const title = titleFrom(text, file.name);
+        const fm = text.match(/^(\+\+\+|---)\r?\n([\s\S]*?)\r?\n\1(?:\r?\n|$)/);
+        const slugLine = fm?.[2].match(/^slug\s*(?:=|:)\s*["']?(.+?)["']?\s*$/mi);
+        const slug = slugify(slugLine?.[1]?.trim() || file.name);
+        document.getElementById("article-title").textContent = title;
+        document.getElementById("article-file").textContent = `文件：${file.name} · ${(file.size / 1024).toFixed(1)} KB`;
+        document.getElementById("article-route").textContent = `预期链接：/posts/${slug}/`;
+        document.getElementById("article-excerpt").textContent = text.replace(/^\s*(\+\+\+|---)[\s\S]*?\1\s*/, "").trim().slice(0, 260) || "已有文章头信息；上传时会原样保留。";
+        preview.classList.add("show");
+        button.disabled = false;
+      } catch {
+        selectedFile = null;
+        button.disabled = true;
+        showStatus("文件不是有效的 UTF-8 编码，请另存为 UTF-8 Markdown 后重试。", "error");
+      }
+    }
+
+    input.addEventListener("change", () => chooseFile(input.files?.[0]));
+    for (const event of ["dragenter", "dragover"]) drop.addEventListener(event, e => { e.preventDefault(); drop.classList.add("over"); });
+    for (const event of ["dragleave", "drop"]) drop.addEventListener(event, e => { e.preventDefault(); drop.classList.remove("over"); });
+    drop.addEventListener("drop", e => chooseFile(e.dataTransfer?.files?.[0]));
+    drop.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); input.click(); } });
+
+    document.getElementById("publish-form").addEventListener("submit", async e => {
+      e.preventDefault();
+      if (!selectedFile || button.disabled) return;
+      button.disabled = true;
+      button.textContent = "正在提交档案…";
+      showStatus("正在同步 main 分支、保存文章并推送到 GitHub…");
+      try {
+        const bytes = new Uint8Array(await selectedFile.arrayBuffer());
+        let binary = "";
+        for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+        const response = await fetch("/api/publish", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ filename: selectedFile.name, content: btoa(binary) }),
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || "上传失败。");
+        status.replaceChildren();
+        const line = document.createElement("span");
+        line.textContent = `已发布「${result.title}」 · 源码 ${result.sourceCommit} · 网站 ${result.deploymentCommit}。`;
+        const br = document.createElement("br");
+        const link = document.createElement("a");
+        link.href = result.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "打开文章链接";
+        status.append(line, br, link);
+        status.className = "status show success";
+        document.getElementById("article-route").textContent = `已推送：${result.path}`;
+      } catch (error) {
+        showStatus(error instanceof Error ? error.message : "上传失败。文章文件如果已写入仓库会保留在本机，请先检查 Git 状态。", "error");
+        button.disabled = false;
+      } finally {
+        button.textContent = "上传并发布 →";
+      }
+    });
+  </script>
+</body>
+</html>

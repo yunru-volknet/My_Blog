@@ -1,8 +1,8 @@
 name: Deploy Hugo site to GitHub Pages
 
 on:
-  push:
-    branches: ["main"]
+  # The live site is the root-domain repository. Keep this legacy project-page
+  # workflow manual-only so article pushes do not republish to /My_Blog/.
   workflow_dispatch:
 
 permissions:
